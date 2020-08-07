@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cassandra-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entity-batch" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/entity-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/keycloak-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/order-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rate-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/rest-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/trade-client" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/trade-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/trade-model" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/trade-server" charset="UTF-8" />
+  </component>
+</project>

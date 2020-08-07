@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="cassandra-service" />
+        <module name="entity-batch" />
+        <module name="entity-server" />
+        <module name="keycloak-service" />
+        <module name="order-server" />
+        <module name="rate-server" />
+        <module name="rest-service" />
+        <module name="trade-client" />
+        <module name="trade-common" />
+        <module name="trade-model" />
+        <module name="trade-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="maven-archiver" target="1.5" />
+      <module name="maven-archiver (1)" target="1.5" />
+      <module name="trade-test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="cassandra-service" options="-parameters" />
+      <module name="entity-batch" options="-parameters" />
+      <module name="entity-server" options="-parameters" />
+      <module name="keycloak-service" options="-parameters" />
+      <module name="order-server" options="-parameters" />
+      <module name="rate-server" options="-parameters" />
+      <module name="rest-service" options="-parameters" />
+      <module name="trade-client" options="-parameters" />
+      <module name="trade-common" options="-parameters" />
+      <module name="trade-model" options="-parameters" />
+      <module name="trade-server" options="-parameters" />
+      <module name="trade-test" options="-parameters" />
+    </option>
+  </component>
+</project>
