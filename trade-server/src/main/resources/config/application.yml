@@ -1,0 +1,58 @@
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    com.trade: INFO
+
+spring:
+
+server:
+  port: 8082
+
+cassandra:
+  fxtrade:
+    keyspace-name: fxtrade
+    contact-points: localhost
+    port: 9042
+    local-data-center: datacenter1
+    schema-action: CREATE_IF_NOT_EXISTS
+    entity-base-packages: com.trade.fxtrade
+
+keycloak:
+  auth-server-url: http://localhost:8090/auth
+  realm: trade-realm
+  resource: fx-trade-client
+  public-client: true
+
+kafka:
+  consumer:
+    bootstrap-servers: localhost:9092
+    group-id: group-id
+    auto-offset-reset: earliest
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  producer:
+    bootstrap-servers: localhost:9092
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+---
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    org.springframework.security: DEBUG
+    com.trade: DEBUG
+    org.keycloak: DEBUG
+
+spring:
+  profiles: dev
+
+restclient:
+  fxtrade:
+    uri: http://localhost:8082
+
+
+
+

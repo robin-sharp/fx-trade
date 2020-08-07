@@ -1,0 +1,1 @@
+#If that’s the case, the simplest solution is to actually not specify any contact point, in which case the default LBP will switch to “test mode” (so to speak) and assume that 1) the contact point is localhost and 2) the local DC is whatever DC that contact point reports.

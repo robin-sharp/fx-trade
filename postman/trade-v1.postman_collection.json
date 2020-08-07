@@ -1,0 +1,471 @@
+{
+  "info": {
+    "_postman_id": "12ce220e-d4bf-4e11-bf27-991ace4c9b9d",
+    "name": "trade-v1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "keycloak openid",
+      "item": [
+        {
+          "name": "openid_configuration",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8090/auth/realms/trade-realm/.well-known/openid-configuration",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8090",
+              "path": [
+                "auth",
+                "realms",
+                "trade-realm",
+                ".well-known",
+                "openid-configuration"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "fx-trade token_endpoint",
+          "protocolProfileBehavior": {
+            "disabledSystemHeaders": {
+              "host": true
+            }
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text"
+                },
+                {
+                  "key": "client_id",
+                  "value": "fx-trade-client",
+                  "type": "text"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "26bdb8cb-2d0a-4e96-8805-6d23bf1a5296",
+                  "type": "text"
+                },
+                {
+                  "key": "username",
+                  "value": "robin.sharp",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password",
+                  "type": "text"
+                },
+                {
+                  "key": "scope",
+                  "value": "openid",
+                  "type": "text"
+                }
+              ],
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{keycloak-uri}}/auth/realms/trade-realm/protocol/openid-connect/token",
+              "host": [
+                "{{keycloak-uri}}"
+              ],
+              "path": [
+                "auth",
+                "realms",
+                "trade-realm",
+                "protocol",
+                "openid-connect",
+                "token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "fce71152-10f9-410d-8089-adb3702f625c",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "4ec00f8c-d3df-47d8-a294-2c9e710a8697",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "/fxtrade",
+      "item": [
+        {
+          "name": "/fxtrades",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{fx-trade-uri}}/fxtrades",
+              "host": [
+                "{{fx-trade-uri}}"
+              ],
+              "path": [
+                "fxtrades"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/fxtrade/{tradeId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{fx-trade-uri}}/fxtrade/7a3917aa-08ad-439c-9c62-aaa9f76988af",
+              "host": [
+                "{{fx-trade-uri}}"
+              ],
+              "path": [
+                "fxtrade",
+                "7a3917aa-08ad-439c-9c62-aaa9f76988af"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/fxtrade",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"tradeId\": \"7a3917aa-08ad-439c-9c62-aaa9f76988af\",\r\n    \"trader\": \"robin.sharp\",\r\n    \"party\": \"rsl\",\r\n    \"counterparty\": \"bank2\",\r\n    \"tradeStatus\": \"EXECUTED\",\r\n    \"executionTime\": \"2020-07-22T13:15:17.019\",\r\n    \"buySell\": \"BUY\",\r\n    \"amount\": 1000000.00,\r\n    \"forwardDate\": \"2020-07-23\",\r\n    \"currencyPair\": \"GBPUSD\",\r\n    \"rate\": 1.123456\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{fx-trade-uri}}/fxtrade",
+              "host": [
+                "{{fx-trade-uri}}"
+              ],
+              "path": [
+                "fxtrade"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/fxtrades",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\r\n        \"tradeId\": \"7a3917aa-08ad-439c-9c62-aaa9f769881a\",\r\n        \"trader\": \"robin.sharp\",\r\n        \"party\": \"rsl\",\r\n        \"counterparty\": \"bank2\",\r\n        \"tradeStatus\": \"EXECUTED\",\r\n        \"executionTime\": \"2020-07-22T13:15:17.019\",\r\n        \"buySell\": \"BUY\",\r\n        \"amount\": 1000000.00,\r\n        \"forwardDate\": \"2020-07-23\",\r\n        \"currencyPair\": \"GBPUSD\",\r\n        \"rate\": 1.123456\r\n    },\r\n    {\r\n        \"tradeId\": \"7a3917aa-08ad-439c-9c62-aaa9f769881b\",\r\n        \"trader\": \"robin.sharp\",\r\n        \"party\": \"rs2\",\r\n        \"counterparty\": \"bank2\",\r\n        \"tradeStatus\": \"EXECUTED\",\r\n        \"executionTime\": \"2020-07-22T13:15:17.020\",\r\n        \"buySell\": \"BUY\",\r\n        \"amount\": 1000000.00,\r\n        \"forwardDate\": \"2020-07-23\",\r\n        \"currencyPair\": \"GBPUSD\",\r\n        \"rate\": 1.123456\r\n    }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{fx-trade-uri}}/fxtrades",
+              "host": [
+                "{{fx-trade-uri}}"
+              ],
+              "path": [
+                "fxtrades"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/fxtrade/{tradeId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{fx-trade-uri}}/fxtrade/7a3917aa-08ad-439c-9c62-aaa9f76988af",
+              "host": [
+                "{{fx-trade-uri}}"
+              ],
+              "path": [
+                "fxtrade",
+                "7a3917aa-08ad-439c-9c62-aaa9f76988af"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "oauth2",
+        "oauth2": [
+          {
+            "key": "accessToken",
+            "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJYQWl2YkYyWXF3TFRYYlYwM1lHUGlUaGFKRUNzanhEVU9JRHJ2R3FzME1FIn0.eyJleHAiOjE1OTY2Nzc1MzIsImlhdCI6MTU5NjY0MTUzMiwianRpIjoiNWNhNTZhYjctOGQ1NC00ODcxLWJmMzYtMDQzNmI2NjM4MTI4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDkwL2F1dGgvcmVhbG1zL3RyYWRlLXJlYWxtIiwiYXVkIjpbImVudGl0eS1jbGllbnQiLCJhY2NvdW50Il0sInN1YiI6ImVhZTFlNzVkLWFkNTEtNDA5MS04Y2M3LThkN2Y0NzhkZDhlNSIsInR5cCI6IkJlYXJlciIsImF6cCI6ImZ4LXRyYWRlLWNsaWVudCIsInNlc3Npb25fc3RhdGUiOiI5NmIyOWQyYS1lN2E1LTQzZmYtODdkOC03YzgwYjRkNGM0YzUiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4MiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImVudGl0eS1jbGllbnQiOnsicm9sZXMiOlsiUGFydHktSW50ZXJuYWwtRGVsZXRlLVJvbGUiLCJQYXJ0eS1JbnRlcm5hbC1TYXZlLVJvbGUiLCJQYXJ0eS1JbnRlcm5hbC1GaW5kLVJvbGUiXX0sImZ4LXRyYWRlLWNsaWVudCI6eyJyb2xlcyI6WyJGeFRyYWRlLUludGVybmFsLVNhdmUtUm9sZSIsIkZ4VHJhZGUtSW50ZXJuYWwtRGVsZXRlLVJvbGUiLCJGeFRyYWRlLUludGVybmFsLUZpbmQtUm9sZSJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoicm9iaW4uc2hhcnAifQ.JgpsvYzQP6HxvZ5JjYG2xALWm8iSs_7D63-MmCyLM3sg9fSk1RYfJ6KSEBvrmllKPmU7g7KSve9ig3yAS9tCjBSJCYay2eYLH_N4S4I-as1fel2BUavc9VHUwkrqg3v88K7Smqa7PeYxlOYUFMIbr7NZA28bQkeEOQ3GIXzAp-KsW3ffI3rDW8G-ZkjtpjfwufMGEzEOcIWev_Of6W9qiYhMDoPZ5E9WvA8vONaC7HFi96xez7t8Woq5AyYoMbpoEmgDdVpRrnoYNL0WqFoZhFsfFgicyTpSjI8OMm2IHwAgU2YTi8B28dMFHwMhWhlar8ry-IkvcbvyYI0CqOfeRQ",
+            "type": "string"
+          },
+          {
+            "key": "tokenType",
+            "value": "bearer",
+            "type": "string"
+          },
+          {
+            "key": "addTokenTo",
+            "value": "header",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "95d0b9c9-70fc-4e86-b712-3dbe0ddadd93",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "e66fae66-db3d-45b6-b7d0-09a6b3a02d1f",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {}
+    },
+    {
+      "name": "/party",
+      "item": [
+        {
+          "name": "/parties",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{entity-uri}}/parties",
+              "host": [
+                "{{entity-uri}}"
+              ],
+              "path": [
+                "parties"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/party/{partyId}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{entity-uri}}/party/{{partyId}}",
+              "host": [
+                "{{entity-uri}}"
+              ],
+              "path": [
+                "party",
+                "{{partyId}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/parties",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\r\n    \"partyId\": \"63394450-d0df-441d-8261-7ff80ef20ffe\",\r\n    \"partyCode\": \"NRNBGB2L\",\r\n    \"fullName\": \"VIRGIN MONEY PLC\",\r\n    \"countryCode\": \"GB\",\r\n    \"creationTime\": \"2020-07-24T16:17:51.529\",\r\n    \"entityStatus\": \"CREATED\",\r\n    \"statusChangeTime\": \"2020-07-24T16:17:51.529\",\r\n    \"emails\": null\r\n}\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{entity-uri}}/parties",
+              "host": [
+                "{{entity-uri}}"
+              ],
+              "path": [
+                "parties"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/party",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"partyId\": \"63394450-d0df-441d-8261-7ff80ef20ffe\",\r\n    \"partyCode\": \"NRNBGB2L\",\r\n    \"fullName\": \"VIRGIN MONEY PLC\",\r\n    \"countryCode\": \"GB\",\r\n    \"creationTime\": \"2020-07-24T16:17:51.529\",\r\n    \"entityStatus\": \"CREATED\",\r\n    \"statusChangeTime\": \"2020-07-24T16:17:51.529\",\r\n    \"emails\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{entity-uri}}/party",
+              "host": [
+                "{{entity-uri}}"
+              ],
+              "path": [
+                "party"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/party/{partyId}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{entity-uri}}/party/",
+              "host": [
+                "{{entity-uri}}"
+              ],
+              "path": [
+                "party",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "oauth2",
+        "oauth2": [
+          {
+            "key": "accessToken",
+            "value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJYQWl2YkYyWXF3TFRYYlYwM1lHUGlUaGFKRUNzanhEVU9JRHJ2R3FzME1FIn0.eyJleHAiOjE1OTY4MjY5MTQsImlhdCI6MTU5Njc5MDkxNSwianRpIjoiMzk4NTA0NDAtYmUwNy00NzNjLTk5MTYtOWYzNTE3MzFiZWJlIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDkwL2F1dGgvcmVhbG1zL3RyYWRlLXJlYWxtIiwiYXVkIjpbImZ4LXRyYWRlLWNsaWVudCIsImFjY291bnQiXSwic3ViIjoiZWFlMWU3NWQtYWQ1MS00MDkxLThjYzctOGQ3ZjQ3OGRkOGU1IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZW50aXR5LWNsaWVudCIsInNlc3Npb25fc3RhdGUiOiI1ZjAwOTg1Ni04YjM2LTQxYzUtYTY4MC01ZDFlYjczOTJjMDAiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODA4MiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImVudGl0eS1jbGllbnQiOnsicm9sZXMiOlsiUGFydHktSW50ZXJuYWwtRGVsZXRlLVJvbGUiLCJQYXJ0eS1JbnRlcm5hbC1TYXZlLVJvbGUiLCJQYXJ0eS1JbnRlcm5hbC1GaW5kLVJvbGUiXX0sImZ4LXRyYWRlLWNsaWVudCI6eyJyb2xlcyI6WyJGeFRyYWRlLUludGVybmFsLVNhdmUtUm9sZSIsIkZ4VHJhZGUtSW50ZXJuYWwtRGVsZXRlLVJvbGUiLCJGeFRyYWRlLUludGVybmFsLUZpbmQtUm9sZSJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoicm9iaW4uc2hhcnAifQ.cbUoPmXBWQGYOZ4D8FoWXyAmHLB7b6pQuYySJHfC4BBccL7tu0vK5-Q0EpWU5q97vaEN1kHjtU6uUTdRM_508LZXF01byuCrlkLNXLpXBwOXI2CnuD5xM4dZnmoz6TY-D2HRH3fcuLG4SllweBtkjR2ousvYfdny0J5uyhT3_w7WdCLmqakB7lzwskHUjZnmbWDxvfNJUoFE2Ee1sQxoIvzbUEuJRHSYwG4xRKfTSapfUny_jxnnQPcttVUq7RSqGNfh2cDqLa89pTJIFHqx8kSeqtWlbkvYXMbd58fNhXp7bv99nSvL1vgW0QJLT_xq-hkI44ftTnEp6svVi6SeMg",
+            "type": "string"
+          },
+          {
+            "key": "tokenType",
+            "value": "bearer",
+            "type": "string"
+          },
+          {
+            "key": "addTokenTo",
+            "value": "header",
+            "type": "string"
+          }
+        ]
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "id": "2ced57d3-fdeb-4318-9591-0a7cbef35371",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "c002bb9a-be76-4a13-9153-256c9081fe97",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ],
+      "protocolProfileBehavior": {}
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "password",
+        "value": "password",
+        "type": "string"
+      },
+      {
+        "key": "username",
+        "value": "user",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "d7e9d7cd-539a-461d-b3f8-b84fb8c6c19c",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "cfd4ba06-0dad-4556-864c-7e6b747b2950",
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

@@ -1,0 +1,48 @@
+spring:
+  logging:
+  level:
+    ROOT: DEBUG
+    org.springframework: DEBUG
+    com.trade: DEBUG
+
+  main:
+    banner-mode: off
+
+server:
+  port: 8081
+
+cassandra:
+  entity:
+    keyspace-name: entity
+    contact-points: localhost
+    port: 9042
+    local-data-center: datacenter1
+    schema-action: CREATE_IF_NOT_EXISTS
+    entity-base-packages: com.trade.entity
+  #socketReadTimeout=6000
+
+keycloak:
+  auth-server-url: http://localhost:8090/auth
+  realm: trade-realm
+  resource: entity-client
+  public-client: true
+
+
+---
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework: INFO
+    org.springframework.security: DEBUG
+    com.trade: DEBUG
+    org.keycloak: DEBUG
+
+spring:
+  profiles: dev
+
+restclient:
+  fxtrade:
+    uri: http://localhost:8081
+
+

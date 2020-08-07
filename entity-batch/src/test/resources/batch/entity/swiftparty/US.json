@@ -1,0 +1,13 @@
+{
+  "country": "United States",
+  "country_code": "US",
+  "list": [
+    {
+      "id": 1,
+      "bank": "1492 CAPITAL MANAGEMENT, LLC",
+      "city": "MILWAUKEE,WI",
+      "branch": null,
+      "swift_code": "CMNLUS41"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+spring:
+  logging:
+  level:
+    ROOT: DEBUG
+    org.springframework: DEBUG
+    com.trade: DEBUG
+
+  main:
+    banner-mode: off
+    web-application-type: none
+
+  batch:
+    job:
+      enabled: true
+
+server:
+  port:8081
+
+cassandra:
+  entity:
+    keyspace: entity
+    contactPoints: localhost
+    port: 9042
+    localDataCenter: datacenter1
+    schemaAction: CREATE_IF_NOT_EXISTS
+    basePackages: com.trade.entity
+
+batch:
+  swiftparty:
+    jobName: swiftparty
+    fileName: /batch/party/swiftparty/GB.json
+
+
+

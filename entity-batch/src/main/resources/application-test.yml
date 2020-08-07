@@ -1,0 +1,21 @@
+spring:
+  profiles: test
+
+logging:
+  level:
+    ROOT: DEBUG
+    org.springframework: INFO
+    com.trade: DEBUG
+
+restclient:
+  fxtrade:
+    uri: http://localhost
+
+cassandra:
+  entity:
+    keyspace: entity
+    contactPoints: localhost
+    port: 9042
+    localDataCenter: datacenter1
+    schemaAction: CREATE_IF_NOT_EXISTS
+    basePackages: com.trade.entity

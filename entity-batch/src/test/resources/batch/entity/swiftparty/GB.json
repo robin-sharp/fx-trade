@@ -1,0 +1,20 @@
+{
+  "country": "United Kingdom",
+  "country_code": "GB",
+  "list": [
+    {
+      "id": 1,
+      "bank": "1776 RIVERBANK LTD",
+      "city": "LONDON",
+      "branch": "(THE CITY OF LONDON)",
+      "swift_code": "RIVEGB21CTY"
+    },
+    {
+      "id": 2,
+      "bank": "1776 RIVERBANK LTD",
+      "city": "LONDON",
+      "branch": null,
+      "swift_code": "RIVEGB21"
+    }
+  ]
+}
