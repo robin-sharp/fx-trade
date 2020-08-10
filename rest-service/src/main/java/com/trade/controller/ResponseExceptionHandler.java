@@ -3,6 +3,7 @@ package com.trade.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
@@ -15,16 +16,29 @@ import static java.lang.String.format;
 public class ResponseExceptionHandler {
 
 	final static String ERROR_ID = "errorId";
-	private final boolean RETURN_ERROR_MESSAGE = true;
-	private final String ALT_ERROR_MESSAGE = " Please look at server logs for message";
+	final static String ERROR_MESSAGE = "Please search server logs for errorId";
 
 	@org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<String> handleBadRequest(MethodArgumentNotValidException exception) {
+	public ResponseEntity<String> handleMethodArgumentNotValid(MethodArgumentNotValidException exception) {
+		return getResponseEntity(exception, HttpStatus.BAD_REQUEST);
+	}
+
+	@org.springframework.web.bind.annotation.ExceptionHandler(AuthenticationException.class)
+	public ResponseEntity<String> handleAuthenticationException(AuthenticationException exception) {
+		return getResponseEntity(exception, HttpStatus.FORBIDDEN);
+	}
+
+	@org.springframework.web.bind.annotation.ExceptionHandler(RuntimeException.class)
+	public ResponseEntity<String> handleRuntimeException(RuntimeException exception) {
+		return getResponseEntity(exception, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	private ResponseEntity getResponseEntity(Exception exception, HttpStatus httpStatus) {
 		UUID errorId = UUID.randomUUID();
 		log.error(format("Error errorId=%s message=%s", errorId, exception.getMessage()), exception);
 		return ResponseEntity.
-				status(HttpStatus.BAD_REQUEST).
+				status(httpStatus).
 				header(ERROR_ID, errorId.toString()).
-				body(RETURN_ERROR_MESSAGE ? exception.getMessage() : ALT_ERROR_MESSAGE);
+				body(ERROR_MESSAGE);
 	}
 }

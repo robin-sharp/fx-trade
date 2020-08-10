@@ -9,6 +9,7 @@ import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.representations.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.ServletException;
@@ -46,7 +47,7 @@ public class OAuth2SecurityService implements HttpAuthorisationService {
 
 	protected void authorise(HttpServletRequest request, HttpServletResponse response,
 							 Authentication authentication, Principal principal,
-							 String webservice, Set<String> clientRoles) throws ServletException {
+							 String webservice, Set<String> clientRoles) {
 
 		final Set<HttpSecureMethod> httpMethods = secureMethodStore.getHttpMethods(webservice);
 		if (httpMethods == null) {
@@ -58,7 +59,8 @@ public class OAuth2SecurityService implements HttpAuthorisationService {
 		httpMethods.stream().filter(hsm -> hsm.
 				isAuthorised(httpMethod, requestUri, clientRoles)).
 				findFirst().
-				orElseThrow(() -> new ServletException(format("Failed to %s %s because no authorised roles %s", httpMethod, requestUri, clientRoles)));
+				orElseThrow(() -> new AuthenticationException(format("Failed to %s %s because no authorised roles %s", httpMethod, requestUri, clientRoles)) {
+				});
 	}
 
 	private KeycloakPrincipal getKeycloakPrincipal(Authentication authentication) {
