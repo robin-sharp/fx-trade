@@ -13,5 +13,7 @@ public interface PartyService {
 
 	Party getById(UUID partyId);
 
+	Party getByPartyCode(String partyCode);
+
 	Collection<Party> getAll();
 }

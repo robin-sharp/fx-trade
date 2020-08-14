@@ -50,6 +50,13 @@ public class PartyController implements PartyService {
 	}
 
 	@Override
+	@GetMapping("/party/partyCode/{partyCode}")
+	public Party getByPartyCode(@PathVariable String partyCode) {
+		log.info("getByPartyCode partyCode={}", partyCode);
+		return partyService.getByPartyCode(partyCode);
+	}
+
+	@Override
 	@GetMapping("/parties")
 	public Collection<Party> getAll() {
 		log.info("getAll parties");

@@ -27,6 +27,11 @@ public class ExampleTestController {
 		return Arrays.asList("", "");
 	}
 
+	@GetMapping("/java/string/code/{code}")
+	public String findByCode(String code) {
+		return "";
+	}
+
 	@DeleteMapping("/java/string")
 	public void delete(String stringId) {
 	}

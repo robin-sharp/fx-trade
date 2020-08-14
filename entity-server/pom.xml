@@ -80,6 +80,15 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.robinsharp</groupId>
+            <artifactId>keycloak-service</artifactId>
+            <version>${project.version}</version>
+            <classifier>tests</classifier>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Note: Transitive Test Dependencies not included-->
         <dependency>
             <groupId>org.cassandraunit</groupId>

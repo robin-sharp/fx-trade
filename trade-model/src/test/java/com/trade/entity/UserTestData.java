@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class UserTestData {
+
 	public final static UUID USER_UUID = UUID.randomUUID();
 	public final static String LOGIN_NAME = "robin.sharp";
 	public final static String USER_FULL_NAME = "Robin Sharp";

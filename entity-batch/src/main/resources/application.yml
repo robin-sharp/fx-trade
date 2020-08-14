@@ -27,8 +27,12 @@ cassandra:
 
 batch:
   swiftparty:
-    jobName: swiftparty
-    fileName: /batch/party/swiftparty/GB.json
+    job-name: swiftparty
+    location-pattern: classpath:batch/party/swiftparty/GB.json
+    #location-pattern: @classpath:batch/party/swiftparty/*.json
+    exit-on-completion: true
 
-
-
+#TODO move thisto rest client
+restclient:
+  entity:
+    uri: http://localhost:8081

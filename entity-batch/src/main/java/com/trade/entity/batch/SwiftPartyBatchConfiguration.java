@@ -19,7 +19,6 @@ import org.springframework.batch.item.json.JsonItemReader;
 import org.springframework.batch.item.json.builder.JsonItemReaderBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,57 +45,53 @@ public class SwiftPartyBatchConfiguration extends AbstractBatchConfiguration {
 	@Qualifier("CassandraPartyService")
 	private PartyService partyService;
 
-	@Value("classpath:batch/party/swiftparty/GB.json")
-	//@Value("classpath:batch/party/swiftparty/*.json")
-	private Resource[] classpathResources;
-
 	private Resource[] batchResources;
 
 	@Bean("SwiftPartyBatchJob")
 	public Job readSwiftPartyJob() {
 		log.info("Getting job {}", getJobName());
-		batchResources = buildBatchResources(classpathResources);
+		batchResources = buildBatchResources(getResourcesFromLocationPattern());
 		return jobBuilderFactory
 				.get(getJobName())
 				.preventRestart()
-				.flow(step1())
-				.next(exit())
+				.flow(loadSwiftParties())
 				.end()
 				.build();
 	}
 
 	@Bean
-	public Step step1() {
-		log.info("Getting step1");
-		return stepBuilderFactory.get("step1").<SwiftParty, Party>chunk(10)
-				.reader(multiResourceItemReader())
+	public Step loadSwiftParties() {
+		log.info("Getting loadSwiftParties Step");
+		return stepBuilderFactory.get("loadSwiftParties").<SwiftParty, Party>chunk(10)
+				.reader(resourceReader())
 				.processor(processor())
 				.writer(writer())
+				.listener(exitListener())
 				.build();
 	}
 
 	@Bean
 	@StepScope
-	public MultiResourceItemReader<SwiftParty> multiResourceItemReader() {
-		log.info("Getting multiResourceItemReader");
+	public MultiResourceItemReader<SwiftParty> resourceReader() {
+		log.info("Getting SwiftParty MultiResourceItemReader");
 		MultiResourceItemReader resourceItemReader = new MultiResourceItemReader();
 		resourceItemReader.setResources(batchResources);
-		resourceItemReader.setDelegate(reader());
+		resourceItemReader.setDelegate(jsonReader());
 		return resourceItemReader;
 	}
 
-	public JsonItemReader<SwiftParty> reader() {
-		log.info("Getting itemReader");
+	public JsonItemReader<SwiftParty> jsonReader() {
+		log.info("Getting SwiftParty JsonItemReader");
 		return new JsonItemReaderBuilder<SwiftParty>().
 				name(getJobName()).
 				jsonObjectReader(new JacksonJsonObjectReader(SwiftParty.class)).
-				resource(classpathResources[0]). //Fake to get round bug
+				resource(getResourcesFromLocationPattern()[0]). //Hack to get round bug
 				build();
 	}
 
 	@Bean
 	ItemProcessor<SwiftParty, Party> processor() {
-		log.info("Getting processor");
+		log.info("Getting SwiftParty ItemProcessor");
 		return (sp) -> {
 			log.debug("Processing party={}", sp.swift_code);
 			return new Party(UUID.randomUUID(),
@@ -106,13 +101,14 @@ public class SwiftPartyBatchConfiguration extends AbstractBatchConfiguration {
 					LocalDateTime.now(),
 					EntityStatus.CREATED,
 					LocalDateTime.now(),
+					Collections.emptyList(),
 					Collections.emptyList());
 		};
 	}
 
 	@Bean
 	public ItemWriter<Party> writer() {
-		log.info("Getting writer");
+		log.info("Getting Party ItemWriter");
 		return (parties) -> {
 			log.debug("Writing parties={}", parties);
 			partyService.saveAll(parties);
@@ -122,7 +118,7 @@ public class SwiftPartyBatchConfiguration extends AbstractBatchConfiguration {
 	/**
 	 * Ensure the Resource[] supplies the filtered ArrayBatchInputStream
 	 */
-	private Resource[] buildBatchResources(Resource[] inputResources) {
+	Resource[] buildBatchResources(Resource[] inputResources) {
 		Resource[] outputResources = new Resource[inputResources.length];
 		for (int index = 0; index < inputResources.length; index++) {
 

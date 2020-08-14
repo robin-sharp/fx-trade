@@ -26,6 +26,7 @@ keycloak:
   realm: trade-realm
   resource: entity-client
   public-client: true
+#  enabled: false
 
 
 ---
@@ -41,8 +42,7 @@ logging:
 spring:
   profiles: dev
 
+#TODO move this to rest client
 restclient:
   fxtrade:
     uri: http://localhost:8081
-
-

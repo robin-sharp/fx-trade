@@ -6,9 +6,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public enum FxTradeRole {
 
+	FXTRADE_SUPPORT_FIND_ROLE("FxTrade-Support-Find-Role"),
+	FXTRADE_SUPPORT_SAVE_ROLE("FxTrade-Support-Save-Role"),
+	FXTRADE_SUPPORT_DELETE_ROLE("FxTrade-Support-Delete-Role"),
 	FXTRADE_INTERNAL_FIND_ROLE("FxTrade-Internal-Find-Role"),
 	FXTRADE_INTERNAL_SAVE_ROLE("FxTrade-Internal-Save-Role"),
-	FXTRADE_INTERNAL_DELETE_ROLE("FxTrade-Internal-Delete-Role"),
 	FXTRADE_EXTERNAL_FIND_ROLE("FxTrade-External-Find-Role"),
 	FXTRADE_EXTERNAL_SAVE_ROLE("FxTrade-External-Save-Role");
 

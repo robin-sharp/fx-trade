@@ -6,13 +6,11 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.LockedException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.validation.Validation;
-
 import java.util.UUID;
 
 import static com.trade.controller.ResponseExceptionHandler.ERROR_MESSAGE;
@@ -24,7 +22,7 @@ public class ResponseExceptionHandlerTest {
 	private ResponseExceptionHandler handler = new ResponseExceptionHandler();
 
 	@Test
-	public void testHandleExceptions() {
+	public void testHandleGeneralExceptions() {
 		checkResponseEntity(HttpStatus.FORBIDDEN, handler.handleAuthenticationException(new LockedException("Account locked")));
 		checkResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, handler.handleRuntimeException(new RuntimeException("Too hot to handle")));
 	}
@@ -50,6 +48,4 @@ public class ResponseExceptionHandlerTest {
 		UUID.fromString(responseEntity.getHeaders().get(ResponseExceptionHandler.ERROR_ID).get(0));
 		assertEquals(ERROR_MESSAGE, responseEntity.getBody());
 	}
-
-
 }

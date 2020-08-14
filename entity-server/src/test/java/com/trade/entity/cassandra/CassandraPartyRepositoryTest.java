@@ -72,7 +72,7 @@ public class CassandraPartyRepositoryTest extends AbstractCassandraServerTest {
 		Optional<Party> outputParty = partyRepository.findById(inputParty.getPartyId());
 		assertEquals(toJson(inputParty), toJson(outputParty.get()));
 
-		partyRepository.delete(inputParty);
+		partyRepository.deleteById(inputParty.getPartyId());
 		Optional<Party> deleteParty = partyRepository.findById(inputParty.getPartyId());
 		assertFalse(deleteParty.isPresent());
 	}

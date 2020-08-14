@@ -21,6 +21,7 @@ class MapPartyServiceTest {
 		PartyService partyService = new MapPartyService();
 		partyService.save(PARTY);
 		assertEquals(PARTY, partyService.getById(PARTY.getPartyId()));
+		assertEquals(PARTY, partyService.getByPartyCode(PARTY.getPartyCode()));
 	}
 
 	@Test

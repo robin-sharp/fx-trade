@@ -84,6 +84,21 @@ public class RestClientPartyService extends AbstractRestClient implements PartyS
 		return response.getBody();
 	}
 
+	public Party getByPartyCode(String partyCode) {
+		log.info("Get party by partcode partyCode={}", partyCode);
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity<Party> requestUpdate = new HttpEntity(headers);
+
+		ResponseEntity<Party> response = restTemplate.exchange(
+				path + "/partyCode/" + partyCode, GET, requestUpdate, Party.class);
+
+		if (response.getStatusCode() != HttpStatus.OK) {
+			throw new IllegalStateException(format("Failed to get Party by partycode partyCode=%s", partyCode));
+		}
+
+		return response.getBody();
+	}
+
 	public Collection<Party> getAll() {
 		log.info("Get all party");
 		HttpHeaders headers = new HttpHeaders();

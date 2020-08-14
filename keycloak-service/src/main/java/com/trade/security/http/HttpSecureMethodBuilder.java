@@ -40,7 +40,7 @@ public class HttpSecureMethodBuilder {
 
 			sortedMethods.values().forEach(method -> {
 				secureMethods.add(new HttpSecureMethod(
-						getHttpMethod(method), requestPath + getPath(method), getRoles(resourceClass, method)));
+						getHttpMethod(method), requestPath + getAnnotationPath(method), getRoles(resourceClass, method)));
 			});
 
 			log.debug("Built secureMethods={}", secureMethods);
@@ -60,7 +60,7 @@ public class HttpSecureMethodBuilder {
 		return requestMappingAnnotation != null ? requestMappingAnnotation.value()[0] : "";
 	}
 
-	String getPath(Method method) {
+	String getAnnotationPath(Method method) {
 		if (method.getAnnotation(GetMapping.class) != null) {
 			return method.getAnnotation(GetMapping.class).value()[0];
 		}
@@ -100,14 +100,16 @@ public class HttpSecureMethodBuilder {
 		String httpMethod = getHttpMethod(method);
 		if ("GET".equals(httpMethod)) {
 			roles.add(resourceClass.getSimpleName() + "-Internal-Find-Role");
+			roles.add(resourceClass.getSimpleName() + "-Support-Find-Role");
 			roles.add(resourceClass.getSimpleName() + "-External-Find-Role");
 		}
 		if ("POST".equals(httpMethod)) {
 			roles.add(resourceClass.getSimpleName() + "-Internal-Save-Role");
+			roles.add(resourceClass.getSimpleName() + "-Support-Save-Role");
 			roles.add(resourceClass.getSimpleName() + "-External-Save-Role");
 		}
 		if ("DELETE".equals(httpMethod)) {
-			roles.add(resourceClass.getSimpleName() + "-Internal-Delete-Role");
+			roles.add(resourceClass.getSimpleName() + "-Support-Delete-Role");
 		}
 
 		return roles;

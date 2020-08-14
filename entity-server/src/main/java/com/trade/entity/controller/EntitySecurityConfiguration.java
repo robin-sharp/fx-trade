@@ -17,7 +17,7 @@ public class EntitySecurityConfiguration {
 	private String webservice;
 
 	@Autowired
-	public void configureMethods(HttpSecureMethodStore httpSecureMethodStore) {
+	public void configureHttpMethods(HttpSecureMethodStore httpSecureMethodStore) {
 		httpSecureMethodStore.addHttpSecureMethods("entity-client",
 				new HttpSecureMethodBuilder().buildHttpSecureMethods(PartyController.class, Party.class));
 	}
@@ -27,11 +27,11 @@ public class EntitySecurityConfiguration {
 		oAuth2SecurityConfiguration.addFilter(httpAuthorisationFilter);
 	}
 
-	public String getWebservice() {
-		return webservice;
-	}
-
-	public void setWebservice(String webservice) {
-		this.webservice = webservice;
-	}
+//	public String getWebservice() {
+//		return webservice;
+//	}
+//
+//	public void setWebservice(String webservice) {
+//		this.webservice = webservice;
+//	}
 }

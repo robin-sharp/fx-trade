@@ -3,7 +3,6 @@ package com.trade.entity;
 import org.junit.jupiter.api.Test;
 import org.springframework.validation.BeanPropertyBindingResult;
 
-import static com.trade.entity.PartyTestData.PARTY;
 import static com.trade.entity.UserTestData.*;
 import static com.trade.util.TestUtil.*;
 import static org.junit.jupiter.api.Assertions.*;

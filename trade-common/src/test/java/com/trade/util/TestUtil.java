@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestUtil {
 
@@ -33,6 +34,11 @@ public class TestUtil {
 
 		jsonList1.forEach(j -> jsonList2.remove(j));
 		assertEquals(0, jsonList2.size(), "Not equal " + jsonList2);
+	}
+
+	public static void assertContains(Collection<?> collection, Object object) {
+		assertTrue(collection.stream().filter(o -> o.equals(object)).findFirst().isPresent(),
+				"object=" + object + " not present in" + collection);
 	}
 
 	/**

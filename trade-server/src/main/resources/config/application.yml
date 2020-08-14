@@ -23,6 +23,10 @@ keycloak:
   realm: trade-realm
   resource: fx-trade-client
   public-client: true
+  enabled: true
+
+oauth2:
+  filters-enabled: false
 
 kafka:
   consumer:

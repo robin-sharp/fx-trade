@@ -1,13 +1,16 @@
 package com.trade.security.http;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 
-import static com.trade.security.http.HttpSecurityTestData.*;
+import static com.trade.JUnitTag.UNIT_TEST;
+import static com.trade.security.SecurityTestData.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Tag(UNIT_TEST)
 class HttpSecureMethodTest {
 
 	@Test
@@ -89,6 +92,6 @@ class HttpSecureMethodTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("httpMethod=GET, httpPath=/path/path, roles=[a, b]", HTTP_SECURE_METHOD.toString());
+		assertEquals("HttpSecureMethod{httpPath=/path/path, httpPath=/path/path, roles=[a, b]}", HTTP_SECURE_METHOD.toString());
 	}
 }

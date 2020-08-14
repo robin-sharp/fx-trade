@@ -1,5 +1,6 @@
 package com.trade.security.http;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
@@ -7,11 +8,13 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static com.trade.security.http.HttpSecurityTestData.HTTP_SECURE_METHODS;
+import static com.trade.JUnitTag.UNIT_TEST;
+import static com.trade.security.SecurityTestData.HTTP_SECURE_METHODS;
 import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Tag(UNIT_TEST)
 class HttpSecureMethodBuilderTest {
 
 	private HttpSecureMethodBuilder builder = new HttpSecureMethodBuilder();
@@ -34,22 +37,53 @@ class HttpSecureMethodBuilderTest {
 
 	@Test
 	void testGetPath() {
-		String path = builder.getPath(getMethod(ExampleTestController.class, "save"));
+		String path = builder.getAnnotationPath(getMethod(ExampleTestController.class, "save"));
 		assertEquals("/java/string", path);
+	}
+
+	@Test
+	void testGetCodePath() {
+		String path = builder.getAnnotationPath(getMethod(ExampleTestController.class, "findByCode"));
+		assertEquals("/java/string/code/{code}", path);
 	}
 
 	@Test
 	void testGetHttpMethod() {
 		assertEquals("POST", builder.getHttpMethod(getMethod(ExampleTestController.class, "save")));
 		assertEquals("GET", builder.getHttpMethod(getMethod(ExampleTestController.class, "findAll")));
+		assertEquals("GET", builder.getHttpMethod(getMethod(ExampleTestController.class, "findByCode")));
 		assertEquals("DELETE", builder.getHttpMethod(getMethod(ExampleTestController.class, "delete")));
 	}
 
 	@Test
-	void testGetRoles() {
-		Set<String> securedRoles = new LinkedHashSet(Arrays.asList("String-Internal-Save-Role", "String-External-Save-Role"));
+	void testFindRoles() {
+		Set<String> securedRoles = new LinkedHashSet(Arrays.asList(
+				"String-Internal-Find-Role", "String-Support-Find-Role", "String-External-Find-Role"));
+		assertEquals(securedRoles.toString(),
+				builder.getRoles(String.class, getMethod(ExampleTestController.class, "findAll")).toString());
+	}
+
+	@Test
+	void testFindByCodeRoles() {
+		Set<String> securedRoles = new LinkedHashSet(Arrays.asList(
+				"String-Internal-Find-Role", "String-Support-Find-Role", "String-External-Find-Role"));
+		assertEquals(securedRoles.toString(),
+				builder.getRoles(String.class, getMethod(ExampleTestController.class, "findByCode")).toString());
+	}
+
+	@Test
+	void testSaveRoles() {
+		Set<String> securedRoles = new LinkedHashSet(Arrays.asList(
+				"String-Internal-Save-Role", "String-Support-Save-Role", "String-External-Save-Role"));
 		assertEquals(securedRoles.toString(),
 				builder.getRoles(String.class, getMethod(ExampleTestController.class, "saveAll")).toString());
+	}
+
+	@Test
+	void testDeleteRoles() {
+		Set<String> securedRoles = new LinkedHashSet(Arrays.asList("String-Support-Delete-Role"));
+		assertEquals(securedRoles.toString(),
+				builder.getRoles(String.class, getMethod(ExampleTestController.class, "delete")).toString());
 	}
 
 	private Method getMethod(Class clazz, String methodName) {
@@ -62,7 +96,7 @@ class HttpSecureMethodBuilderTest {
 			}
 			throw new RuntimeException();
 		} catch (Exception e) {
-			throw new RuntimeException(format("Failed to get method %s#%s", clazz.getSimpleName(), methodName));
+			throw new RuntimeException(format("Failed to get method %s#%s", clazz.getSimpleName(), methodName), e);
 		}
 	}
 }

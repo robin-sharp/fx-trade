@@ -57,8 +57,11 @@ public class Party implements Entity, Serializable {
 	@Column
 	private List<@Email(message = "emails must be valid") String> emails;
 
+	@Column
+	private List<@NotBlank(message = "user cannot be blank") String> users;
+
 	public Party(UUID partyId, String partyCode, String fullName, String countryCode, LocalDateTime creationTime,
-				 EntityStatus entityStatus, LocalDateTime statusChangeTime, List<String> emails) {
+				 EntityStatus entityStatus, LocalDateTime statusChangeTime, List<String> emails, List<String> users) {
 		this.partyId = partyId;
 		this.partyCode = partyCode;
 		this.fullName = fullName;
@@ -67,6 +70,7 @@ public class Party implements Entity, Serializable {
 		this.entityStatus = entityStatus;
 		this.statusChangeTime = statusChangeTime;
 		this.emails = emails;
+		this.users = users;
 	}
 
 	public UUID getPartyId() {
@@ -116,6 +120,10 @@ public class Party implements Entity, Serializable {
 		return emails;
 	}
 
+	public List<String> getUsers() {
+		return users;
+	}
+
 	@Override
 	public String toString() {
 		return new StringBuilder("class=").
@@ -128,6 +136,7 @@ public class Party implements Entity, Serializable {
 				append(", entityStatus=").append(entityStatus).
 				append(", statusChangeTime=").append(statusChangeTime).
 				append(", emails=").append(emails).
+				append(", users=").append(users).
 				toString();
 	}
 

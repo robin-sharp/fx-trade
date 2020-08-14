@@ -12,7 +12,8 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Lightweight In-Memory store that can be used as a replacement for a DB Service
+ * Lightweight In-Memory store that can be used as a replacement for a DB Service.
+ * TODO Spring @Cache
  */
 @Slf4j
 @Service("MapPartyService")
@@ -42,6 +43,11 @@ public class MapPartyService implements PartyService {
 	public Party getById(UUID partyId) {
 		log.info("getById partyId={}", partyId);
 		return parties.get(partyId);
+	}
+
+	@Override
+	public Party getByPartyCode(String partyCode) {
+		return parties.values().stream().filter(p -> p.getPartyCode().equals(partyCode)).findFirst().orElse(null);
 	}
 
 	@Override

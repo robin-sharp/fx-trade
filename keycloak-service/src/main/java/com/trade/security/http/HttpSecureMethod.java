@@ -23,7 +23,7 @@ public class HttpSecureMethod {
 
 	public HttpSecureMethod(String httpMethod, String httpPath, Set<String> roles) {
 		this.httpMethod = httpMethod.toUpperCase();
-		this.httpPath = httpPath;
+		this.httpPath = httpPath.toLowerCase();
 		pathPattern = getPathPattern(httpPath);
 		this.roles.addAll(roles);
 	}
@@ -41,12 +41,17 @@ public class HttpSecureMethod {
 	}
 
 	public boolean isAuthorised(String httpMethod, String httpPath, Set<String> clientRoles) {
-		return hasHttpMethod(httpMethod) &&
-				hasHttpPath(httpPath) &&
-				hasRole(clientRoles);
+		return isMethod(httpMethod, httpPath) && hasRole(clientRoles);
+	}
+
+	public boolean isMethod(String httpMethod, String httpPath) {
+		return hasHttpMethod(httpMethod) && hasHttpPath(httpPath);
 	}
 
 	public boolean hasRole(Set<String> clientRoles) {
+		if (clientRoles == null) {
+			return false;
+		}
 		return roles.stream().filter(r -> clientRoles.contains(r)).findFirst().isPresent();
 	}
 
@@ -74,6 +79,18 @@ public class HttpSecureMethod {
 		return false;
 	}
 
+	public int hashcode() {
+		return Objects.hash(httpMethod, httpPath);
+	}
+
+	public String toString() {
+		return new StringBuilder("HttpSecureMethod{").
+				append("httpPath=").append(httpPath).
+				append(", httpPath=").append(httpPath).
+				append(", roles=").append(roles).
+				append("}").toString();
+	}
+
 	Pattern getPathPattern(String httpPath) {
 		if (httpPath.indexOf("{") > 0 && httpPath.indexOf("}") > 0) {
 			String regExPath = httpPath.replaceAll("\\{.*?\\}", "[^/]+");
@@ -82,17 +99,5 @@ public class HttpSecureMethod {
 		}
 
 		return null;
-	}
-
-	public int hashcode() {
-		return Objects.hash(httpMethod, httpPath);
-	}
-
-	public String toString() {
-		return new StringBuffer().
-				append("httpMethod=").append(httpMethod).
-				append(", httpPath=").append(httpPath).
-				append(", roles=").append(roles).
-				toString();
 	}
 }

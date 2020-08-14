@@ -1,14 +1,19 @@
 package com.trade.entity;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
-	public void save(User user);
+	void save(User user);
 
-	public void delete(UUID userId);
+	void saveAll(List<? extends User> users);
 
-	public User getById(UUID userId);
+	void delete(UUID userId);
+
+	User getById(UUID userId);
+
+	User getByLoginName(String loginName);
 
 	public Collection<User> getAll();
 }

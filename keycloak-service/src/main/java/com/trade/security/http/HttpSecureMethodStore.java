@@ -2,7 +2,11 @@ package com.trade.security.http;
 
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A Class that stores HttpSecureMethods.
@@ -13,7 +17,7 @@ import java.util.*;
 @Component
 public class HttpSecureMethodStore {
 
-	private Map<String, Set<HttpSecureMethod>> secureHttpMethods = new HashMap<String, Set<HttpSecureMethod>>();
+	private Map<String, Set<HttpSecureMethod>> secureHttpMethods = new ConcurrentHashMap<String, Set<HttpSecureMethod>>();
 
 	/**
 	 * A webservice identifies a specific host:port, such as an oauth2 client.

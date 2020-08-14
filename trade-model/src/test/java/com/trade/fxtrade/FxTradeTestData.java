@@ -40,9 +40,12 @@ public class FxTradeTestData {
 	public final static FxTrade FX_TRADE_NEGATIVE = new FxTrade(
 			FX_TRADE_UUID, LOGIN_NAME, PARTY_CODE, COUNTERPARTY_CODE, FX_TRADE_STATUS_EXECUTED, EXECUTION_DATETIME,
 			FX_BUY_SELL, ONE_MILLION.negate(), GBP_USD, FORWARD_DATE, ONE_DOT_SIX_DIGITS.negate());
+
+	public final static String FXTRADE_SUPPORT_FIND_ROLE_NAME = "FxTrade-Support-Find-Role";
+	public final static String FXTRADE_SUPPORT_SAVE_ROLE_NAME = "FxTrade-Support-Save-Role";
+	public final static String FXTRADE_SUPPORT_DELETE_ROLE_NAME = "FxTrade-Support-Delete-Role";
 	public final static String FXTRADE_INTERNAL_FIND_ROLE_NAME = "FxTrade-Internal-Find-Role";
 	public final static String FXTRADE_INTERNAL_SAVE_ROLE_NAME = "FxTrade-Internal-Save-Role";
-	public final static String FXTRADE_INTERNAL_DELETE_ROLE_NAME = "FxTrade-Internal-Delete-Role";
 	public final static String FXTRADE_EXTERNAL_FIND_ROLE_NAME = "FxTrade-External-Find-Role";
 	public final static String FXTRADE_EXTERNAL_SAVE_ROLE_NAME = "FxTrade-External-Save-Role";
 

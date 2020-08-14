@@ -20,6 +20,8 @@ public class PartyTest {
 		assertEquals(PARTY_ENTITIY_STATUS, party.getEntityStatus());
 		assertEquals(PARTY_ENTITY_STATUS_CHANGE_TIME, party.getStatusChangeTime());
 		assertEquals(PARTY_EMAILS, party.getEmails());
+		assertEquals(PARTY_USERS, party.getUsers());
+
 
 		assertEquals(PARTY_UUID, party.getEntityId());
 		assertEquals(Party.class.getSimpleName(), party.getEntityType());
@@ -29,7 +31,7 @@ public class PartyTest {
 	@Test
 	public void testPartyIsInvalidValues() {
 		BeanPropertyBindingResult result = getValidationResult(PARTY_INVALID);
-		assertEquals(3, result.getAllErrors().size());
+		assertEquals(5, result.getAllErrors().size());
 	}
 
 	@Test
@@ -56,7 +58,7 @@ public class PartyTest {
 
 	@Test
 	public void testPartyToString() {
-		assertTrue(PARTY.toString().matches("class=Party, partyId=(.*?), partyCode=rsl, fullName=Robin Sharp Ltd, countryCode=GB, creationTime=(.*?), entityStatus=ACTIVE, statusChangeTime=(.*?), emails=\\[robin.sharp@robinsharp.com, robin.sharp@robinsharp.co.uk\\]"));
+		assertTrue(PARTY.toString().matches("class=Party, partyId=(.*?), partyCode=rsl, fullName=Robin Sharp Ltd, countryCode=GB, creationTime=(.*?), entityStatus=ACTIVE, statusChangeTime=(.*?), emails=\\[robin.sharp@robinsharp.com, robin.sharp@robinsharp.co.uk\\], users=\\[robin.sharp\\]"));
 	}
 
 	@Test

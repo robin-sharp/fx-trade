@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS entity.tradeparty(
     entityStatus text,
     statusChangeTime timestamp,
     emails list<text>,
+    users list<text>,
     PRIMARY KEY(partyId)
 );
 

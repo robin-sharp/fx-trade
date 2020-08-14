@@ -6,11 +6,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public enum PartyRole {
 
+	PARTY_SUPPORT_FIND_ROLE("Party-Support-Find-Role"),
+	PARTY_SUPPORT_SAVE_ROLE("Party-Support-Save-Role"),
+	PARTY_SUPPORT_DELETE_ROLE("Party-Support-Delete-Role"),
 	PARTY_INTERNAL_FIND_ROLE("Party-Internal-Find-Role"),
 	PARTY_INTERNAL_SAVE_ROLE("Party-Internal-Save-Role"),
-	PARTY_INTERNAL_DELETE_ROLE("Party-Internal-Delete-Role"),
-	PARTY_EXTERNAL_FIND_ROLE("Party-External-Find-Role"),
-	PARTY_EXTERNAL_SAVE_ROLE("Party-External-Save-Role");
+	PARTY_EXTERNAL_FIND_ROLE("Party-External-Find-Role");
 
 	private static final Map<String, PartyRole> NAME_MAP;
 
@@ -22,10 +23,10 @@ public enum PartyRole {
 		NAME_MAP = Collections.unmodifiableMap(map);
 	}
 
-	private final String roleNname;
+	private final String roleName;
 
 	PartyRole(String roleNname) {
-		this.roleNname = roleNname;
+		this.roleName = roleNname;
 	}
 
 	public static PartyRole getPartyRole(String roleName) {
@@ -33,6 +34,10 @@ public enum PartyRole {
 	}
 
 	public String getRoleName() {
-		return roleNname;
+		return roleName;
+	}
+
+	public String toString() {
+		return roleName;
 	}
 }
