@@ -22,7 +22,7 @@ already been done in the TradeServer module.
 
 ## Run
 
-Start  
+Start
 
 com.trade.fxrates.server.server.FxRateServer 
 
