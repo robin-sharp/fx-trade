@@ -21,8 +21,8 @@
     <dependencies>
         <!-- Cassandra -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-cassandra</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-cassandra</artifactId>
         </dependency>
 
         <!-- Hsql -->

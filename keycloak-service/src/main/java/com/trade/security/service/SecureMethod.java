@@ -19,7 +19,7 @@ public class SecureMethod {
 
 	public SecureMethod(Class secureClass, String methodName, Object... roles) {
 		this(secureClass, methodName,
-				new LinkedHashSet(Arrays.asList(roles).stream().map(Object::toString).collect(Collectors.toList())));
+				new LinkedHashSet<>(Arrays.stream(roles).map(Object::toString).collect(Collectors.toList())));
 	}
 
 	public SecureMethod(Class secureClass, String methodName, Set<String> roles) {
@@ -107,13 +107,13 @@ public class SecureMethod {
 
 	void validateMethod(Class serviceClass, String serviceMethodName) {
 		try {
-			if (!Arrays.asList(serviceClass.getMethods()).stream().
+			if (!Arrays.stream(serviceClass.getMethods()).
 					filter(m -> m.getName().equals(serviceMethodName)).findFirst().isPresent()) {
 				throw new IllegalArgumentException(format("Failed to find methodName=%s", serviceMethodName));
 			}
 		} catch (Exception e) {
 			throw new IllegalArgumentException(
-					format("Failed to validate method secureClass=%s does not have methodName=%s", serviceClass, serviceMethodName));
+					format("Failed to validate method secureClass=%s does not have methodName=%s", serviceClass, serviceMethodName), e);
 		}
 	}
 }

@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class EntityServerTestData {
 
-	public final static String WEBSERVICE = "party-client";
+	public final static String WEBSERVICE = "party-client-config";
 
 	public final static String PRINCIPAL_NAME = "robin.sharp";
 

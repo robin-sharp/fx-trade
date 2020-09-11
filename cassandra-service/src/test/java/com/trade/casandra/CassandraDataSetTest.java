@@ -1,9 +1,12 @@
 package com.trade.casandra;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import static com.trade.JUnitTag.UNIT_TEST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Tag(UNIT_TEST)
 public class CassandraDataSetTest {
 
 	@Test

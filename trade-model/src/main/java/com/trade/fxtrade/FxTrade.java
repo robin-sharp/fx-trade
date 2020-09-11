@@ -77,8 +77,8 @@ public class FxTrade implements Trade, Serializable {
 	@Column
 	private String currencyPair;
 
-	@NotNull(message = "rate is mandatory")
-	@Positive(message = "rate must be positive")
+	@NotNull(message = "rates is mandatory")
+	@Positive(message = "rates must be positive")
 	@Column
 	private BigDecimal rate;
 
@@ -175,7 +175,7 @@ public class FxTrade implements Trade, Serializable {
 				append(", amount=").append(amount).
 				append(", currencyPair=").append(currencyPair).
 				append(", forwardDate=").append(forwardDate).
-				append(", rate=").append(rate).
+				append(", rates=").append(rate).
 				toString();
 	}
 

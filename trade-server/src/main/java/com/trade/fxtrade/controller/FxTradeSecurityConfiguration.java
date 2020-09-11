@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FxTradeSecurityConfiguration {
 
-	private final static String FXTRADE_WEBSERVICE = "fx-trade-client";
+	private final static String FXTRADE_WEBSERVICE = "fx-trade-client-config";
 
 	@Autowired
 	public void configure(HttpSecureMethodStore httpSecureMethodStore) {

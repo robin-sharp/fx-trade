@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 /**
  * Class used to configure Basic Authentication to a webservice.
  * <p>
- * When this is added the client will need to send a Basic Auth header with user/password.
+ * When this is added the client-config will need to send a Basic Auth header with user/password.
  */
 @Configuration
 @EnableWebSecurity

@@ -1,0 +1,20 @@
+spring:
+
+logging:
+  level:
+    ROOT: DEBUG
+    org.springframework: DEBUG
+    com.trade.*: DEBUG
+
+
+security:
+  basic:
+    enabled: false
+
+server:
+  port: 8084
+
+  #kafka:
+  ##  fxrates:
+  ##    bootstrapAddress: localhost:9092
+  ##    fxrates_topic_name: fxrates

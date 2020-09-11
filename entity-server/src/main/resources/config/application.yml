@@ -24,7 +24,7 @@ cassandra:
 keycloak:
   auth-server-url: http://localhost:8090/auth
   realm: trade-realm
-  resource: entity-client
+  resource: entity-client-config
   public-client: true
 #  enabled: false
 
@@ -42,7 +42,7 @@ logging:
 spring:
   profiles: dev
 
-#TODO move this to rest client
+#TODO move this to rest client-config
 restclient:
   fxtrade:
     uri: http://localhost:8081

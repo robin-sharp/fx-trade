@@ -7,7 +7,7 @@ import static com.trade.fxtrade.FxDate.SPOT;
 import static com.trade.util.TestUtil.assertSerializable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FxDateTest {
+class FxDateTest {
 	@Test
 	public void testFxDateGetDate() {
 		assertEquals(SPOT, FxDate.getDate("SPOT"));

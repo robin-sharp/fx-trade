@@ -45,7 +45,7 @@ See the postman.md for details how to configure a client.
 
 Go to postman and the "keycloak openid" folder and and run an end point to generate a
 JWT access token such as "/fx-trade/token_endpoint", passing in the client_secret from the
-Keycloak Admin Console /clients/credentials tab and the user name and password.
+Keycloak Admin Console /clients/credentials tab and the user destinationName and password.
 
 Access Token Lifespan  is set to 15 hours
 

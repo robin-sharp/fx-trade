@@ -1,0 +1,12 @@
+spring:
+  logging:
+    level:
+      ROOT: DEBUG
+      org.springframework: DEBUG
+      com.trade: DEBUG
+
+wsurl: ws://localhost:8084/stomp
+
+wsserver:
+  fxrates:
+    wsurl: ws://localhost:8084/fxrates

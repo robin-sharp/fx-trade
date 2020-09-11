@@ -17,10 +17,10 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class HttpSecureMethodStore {
 
-	private Map<String, Set<HttpSecureMethod>> secureHttpMethods = new ConcurrentHashMap<String, Set<HttpSecureMethod>>();
+	private Map<String, Set<HttpSecureMethod>> secureHttpMethods = new ConcurrentHashMap<>();
 
 	/**
-	 * A webservice identifies a specific host:port, such as an oauth2 client.
+	 * A webservice identifies a specific host:port, such as an oauth2 client-config.
 	 */
 	public Set<HttpSecureMethod> getHttpMethods(String webservice) {
 		return secureHttpMethods.get(webservice);
@@ -32,7 +32,7 @@ public class HttpSecureMethodStore {
 	}
 
 	public HttpSecureMethodStore addHttpSecureMethod(String webservice, String httpMethod, String httpPath, String... roles) {
-		addHttpSecureMethod(webservice, new HttpSecureMethod(httpMethod, httpPath, new HashSet(Arrays.asList(roles))));
+		addHttpSecureMethod(webservice, new HttpSecureMethod(httpMethod, httpPath, new HashSet<>(Arrays.asList(roles))));
 		return this;
 	}
 

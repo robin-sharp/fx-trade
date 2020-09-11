@@ -16,6 +16,9 @@ Trade uses the following tech stack:-
 - Java 8
 - Spring 5 - Framework
 - Spring 2 Boot - Configuration
+- Spring Batch
+- Spring Websockets/STOMP
+- Spring Integration
 - Tomcat 9.0.36 - Rest
 - Casandra 3.11.6.0 - Database 
 - Kafka 2.5.0 - Messaging (todo)
@@ -45,13 +48,21 @@ See hazelcast-service/hazelcast.md
 
 See kafka-service/kafka.md
 
+### Spring Batch 
+
+See entity-batch
+
+### Spring Websockets/STOMP and Spring Integration
+
+See rate-server/rate-server.md
+
 ## Run 
 
 Set the env variable to SPRING_PROFILES_ACTIVE to dev or test
 
 A Postman runner can be used to smoke test the rest endpoints (see postman.md)
 
-- Tech Stack
+- Tech Servers (non-application)
  - Cassandra Server (see cassandra-service/cassandra.md)
  - Keycloak Server (see keycloak-service/keycloak.md)
  - Hazelcast (todo)
@@ -78,10 +89,8 @@ A Postman runner can be used to smoke test the rest endpoints (see postman.md)
   - Upload Parties into the Party table
   
 - Rate Server
-  - (todo) Start the RateServer
-  - (todo) Update Rates in the RateServer
-  - (todo) Subscribe to Rates in the RateServer
-  - (todo) Publish Rates from the RateServer
+  - Start FxRateServer 
+  - Start FxRateClient
 
 - Order Server
   - (todo) Start the OrderServer

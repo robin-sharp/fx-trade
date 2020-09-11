@@ -83,7 +83,7 @@
         <dependency>
             <groupId>com.robinsharp</groupId>
             <artifactId>keycloak-service</artifactId>
-            <version>${project.version}</version>
+            <version>0.0.1-SNAPSHOT</version>
             <classifier>tests</classifier>
             <type>test-jar</type>
             <scope>test</scope>

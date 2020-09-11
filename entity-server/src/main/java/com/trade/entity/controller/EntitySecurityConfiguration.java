@@ -18,7 +18,7 @@ public class EntitySecurityConfiguration {
 
 	@Autowired
 	public void configureHttpMethods(HttpSecureMethodStore httpSecureMethodStore) {
-		httpSecureMethodStore.addHttpSecureMethods("entity-client",
+		httpSecureMethodStore.addHttpSecureMethods("entity-client-config",
 				new HttpSecureMethodBuilder().buildHttpSecureMethods(PartyController.class, Party.class));
 	}
 
