@@ -14,10 +14,10 @@ The product specific rates are then sent to a WebSocketPublisher which will publ
 to clients who have subscribed to them, by appending a client session id.
 
 Client's can unsubscribe from the server, but if their connection closes unexpectedly then a WebSocket 
-handshake manager is scheduled to run every n (10) seconds to check for any clients who have not
+heartbeat manager is scheduled to run every n (10) seconds to check for any clients who have not
 sent a heartbeat for the past n (25) seconds, and that client's session is then unsubscribed. 
 
-WebSocket security is partly implemented, up the the point of calling into a KeyCloak server, which has
+WebSocket security is partly implemented, up to the point of calling into a KeyCloak server, which has
 already been done in the TradeServer module. 
 
 ## Run
